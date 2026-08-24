@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cardápio — Costelão Gaúcho</title>
+<meta name="description" content="Costela no bafo, espetinho na brasa e almoço todo dia. Cardápio do Costelão Gaúcho.">
+<meta name="theme-color" content="#D2380E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --carvao:#1E1713;
+    --brasa:#D2380E;
+    --brasa-forte:#A82A08;
+    --osso:#EDE7DA;
+    --osso-2:#E2DACA;
+    --cinza:#6E6357;
+    --zap:#1F7A3D;
+    --amarelo:#EFB01F;
+
+    --display:"Alfa Slab One", Georgia, serif;
+    --texto:"Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    --max:640px;
+    --gut:20px;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--osso);
+    color:var(--carvao);
+    font-family:var(--texto);
+    font-size:16px;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--max);margin:0 auto;background:var(--osso)}
+
+  /* ---------- faixa de toalha xadrez (assinatura da casa) ---------- */
+  .toalha{
+    height:24px;
+    background-color:#fff;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(210,56,14,.55) 0 12px, transparent 12px 24px),
+      repeating-linear-gradient(0deg,  rgba(210,56,14,.55) 0 12px, transparent 12px 24px);
+  }
+
+  /* ---------- topo ---------- */
+  .topo{
+    background:var(--carvao);
+    color:var(--osso);
+    padding:34px var(--gut) 26px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .topo::after{
+    content:"";
+    position:absolute;inset:auto 0 0 0;height:120px;
+    background:radial-gradient(60% 100% at 50% 130%, rgba(210,56,14,.55), transparent 70%);
+    pointer-events:none;
+  }
+  .topo .marca{
+    font-family:var(--display);
+    font-size:clamp(34px,10vw,46px);
+    line-height:.95;
+    letter-spacing:-.5px;
+    margin:0;
+    text-transform:uppercase;
+  }
+  .topo .marca span{color:var(--brasa)}
+  .topo .lema{
+    margin:12px auto 0;
+    max-width:30ch;
+    font-size:14px;
+    color:#C9BCAA;
+    letter-spacing:.02em;
+  }
+  .acoes{display:flex;gap:10px;justify-content:center;margin-top:20px;position:relative;z-index:1;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:7px;
+    padding:11px 18px;border-radius:999px;
+    font-size:14px;font-weight:700;text-decoration:none;
+    border:1.5px solid transparent;
+  }
+  .btn-zap{background:var(--zap);color:#fff}
+  .btn-ghost{border-color:#4A403A;color:var(--osso)}
+  .btn:focus-visible{outline:3px solid var(--amarelo);outline-offset:2px}
+
+  /* ---------- navegação grudada ---------- */
+  .nav{
+    position:sticky;top:0;z-index:20;
+    background:var(--osso);
+    border-bottom:1px solid var(--osso-2);
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .nav::-webkit-scrollbar{display:none}
+  .nav ul{display:flex;gap:8px;list-style:none;margin:0;padding:11px var(--gut)}
+  .nav a{
+    display:block;white-space:nowrap;
+    font-size:13px;font-weight:600;text-decoration:none;
+    color:var(--cinza);
+    padding:7px 13px;border-radius:999px;
+    border:1px solid var(--osso-2);
+    background:#fff;
+  }
+  .nav a[aria-current="true"]{background:var(--carvao);color:var(--osso);border-color:var(--carvao)}
+  .nav a:focus-visible{outline:2px solid var(--brasa);outline-offset:2px}
+
+  /* ---------- palco: secoes reordenaveis por turno ---------- */
+  .palco{display:flex;flex-direction:column}
+
+  .turno{
+    display:flex;gap:4px;margin:18px auto 0;
+    background:var(--osso-2);border-radius:999px;padding:4px;
+    width:calc(100% - 40px);max-width:300px;
+  }
+  .turno button{
+    flex:1;border:0;cursor:pointer;
+    font-family:var(--texto);font-size:13.5px;font-weight:700;
+    padding:10px 8px;border-radius:999px;
+    background:transparent;color:var(--cinza);
+    transition:background .18s ease,color .18s ease;
+  }
+  .turno button[aria-pressed="true"]{background:var(--brasa);color:#fff}
+  .turno button:focus-visible{outline:2px solid var(--carvao);outline-offset:2px}
+  .turno-dica{text-align:center;font-size:12px;color:var(--cinza);margin:8px 0 12px;padding:0 20px}
+
+  body.t-almoco #almoco,      body.t-almoco .nav li[data-sec="almoco"]{order:1}
+  body.t-almoco #completa,    body.t-almoco .nav li[data-sec="completa"]{order:2}
+  body.t-almoco #caldinhos,   body.t-almoco .nav li[data-sec="caldinhos"]{order:3}
+  body.t-almoco #bebidas,     body.t-almoco .nav li[data-sec="bebidas"]{order:4}
+  body.t-almoco #petiscos,    body.t-almoco .nav li[data-sec="petiscos"]{order:5}
+  body.t-almoco #espetinhos,  body.t-almoco .nav li[data-sec="espetinhos"]{order:6}
+  body.t-almoco #doses,       body.t-almoco .nav li[data-sec="doses"]{order:7}
+
+  body.t-noite #petiscos,     body.t-noite .nav li[data-sec="petiscos"]{order:1}
+  body.t-noite #espetinhos,   body.t-noite .nav li[data-sec="espetinhos"]{order:2}
+  body.t-noite #bebidas,      body.t-noite .nav li[data-sec="bebidas"]{order:3}
+  body.t-noite #caldinhos,    body.t-noite .nav li[data-sec="caldinhos"]{order:4}
+  body.t-noite #doses,        body.t-noite .nav li[data-sec="doses"]{order:5}
+  body.t-noite #completa,     body.t-noite .nav li[data-sec="completa"]{order:6}
+  body.t-noite #almoco,       body.t-noite .nav li[data-sec="almoco"]{order:7}
+
+  /* ---------- seções ---------- */
+  .sec{padding:30px var(--gut) 8px;scroll-margin-top:60px}
+  .sec::before{
+    content:"";display:block;height:24px;
+    margin:-30px calc(-1 * var(--gut)) 30px;
+    background-color:#fff;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(210,56,14,.55) 0 12px, transparent 12px 24px),
+      repeating-linear-gradient(0deg,  rgba(210,56,14,.55) 0 12px, transparent 12px 24px);
+  }
+  .sec h2{
+    font-family:var(--display);
+    font-size:26px;line-height:1.05;
+    margin:0;text-transform:uppercase;letter-spacing:-.3px;
+  }
+  .sec .sub{
+    margin:9px 0 0;font-size:13.5px;color:var(--cinza);max-width:44ch;
+  }
+  .sec .sub strong{color:var(--brasa-forte);font-weight:600}
+
+  /* ---------- chave meio / completo ---------- */
+  .chave{
+    display:flex;gap:4px;margin:18px 0 4px;
+    background:var(--osso-2);border-radius:999px;padding:4px;
+    width:100%;max-width:320px;
+  }
+  .chave button{
+    flex:1;border:0;cursor:pointer;
+    font-family:var(--texto);font-size:13px;font-weight:700;
+    padding:9px 8px;border-radius:999px;
+    background:transparent;color:var(--cinza);
+    transition:background .18s ease, color .18s ease;
+  }
+  .chave button[aria-pressed="true"]{background:var(--carvao);color:var(--osso)}
+  .chave button:focus-visible{outline:2px solid var(--brasa);outline-offset:2px}
+  .chave-dica{margin:8px 0 0;font-size:12.5px;color:var(--cinza)}
+
+  /* ---------- itens ---------- */
+  .lista{list-style:none;margin:14px 0 0;padding:0}
+  .item{
+    display:flex;gap:14px;align-items:baseline;
+    padding:13px 0;border-bottom:1px solid rgba(30,23,19,.10);
+  }
+  .item:last-child{border-bottom:0}
+  .item .txt{flex:1;min-width:0}
+  .item .nome{font-size:16px;font-weight:600;margin:0;letter-spacing:-.1px}
+  .item .desc{margin:3px 0 0;font-size:13px;color:var(--cinza);line-height:1.35}
+  .item .preco{
+    font-size:16px;font-weight:700;
+    font-variant-numeric:tabular-nums;
+    white-space:nowrap;
+    transition:opacity .15s ease;
+  }
+  .item .preco::before{content:"R$ ";font-size:11px;font-weight:600;color:var(--cinza)}
+  .item[hidden]{display:none}
+
+  .tag{
+    display:inline-block;vertical-align:middle;
+    margin-left:7px;padding:2px 7px;border-radius:4px;
+    font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  }
+  .tag-top{background:var(--amarelo);color:#3B2A05}
+  .tag-uni{background:var(--osso-2);color:var(--cinza)}
+
+  .destaque{
+    margin:16px 0 0;padding:18px;border-radius:14px;
+    background:var(--carvao);color:var(--osso);
+  }
+  .destaque .tag{margin-left:0}
+  .destaque .nome{font-family:var(--display);font-size:20px;margin:0;text-transform:uppercase;line-height:1.1}
+  .destaque .desc{margin:7px 0 0;font-size:13px;color:#C9BCAA}
+  .destaque .preco{margin:12px 0 0;font-size:24px;font-weight:700;color:var(--brasa);font-variant-numeric:tabular-nums}
+  .destaque .preco::before{content:"R$ ";font-size:13px;color:#C9BCAA}
+
+  .grupo{margin-top:22px}
+  .grupo h3{
+    font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.11em;
+    color:var(--brasa-forte);margin:0 0 2px;
+  }
+
+  /* ---------- rodapé ---------- */
+  .rodape{background:var(--carvao);color:#C9BCAA;padding:30px var(--gut) 38px;margin-top:32px}
+  .rodape h2{font-family:var(--display);color:var(--osso);font-size:20px;margin:0 0 12px;text-transform:uppercase}
+  .rodape p{margin:0 0 9px;font-size:13.5px;line-height:1.5}
+  .rodape a{color:var(--osso)}
+  .aviso{
+    margin-top:18px;padding-top:16px;border-top:1px solid #372E28;
+    font-size:11.5px;line-height:1.5;color:#8C7F73;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;animation:none !important;scroll-behavior:auto !important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="topo">
+    <h1 class="marca">Costelão<br><span>Gaúcho</span></h1>
+    <p class="lema">Costela no bafo, espeto na brasa e almoço todo dia.</p>
+    <div class="acoes">
+      <a class="btn btn-zap" href="https://wa.me/5581984499419" target="_blank" rel="noopener">Pedir no WhatsApp</a>
+      <a class="btn btn-ghost" href="#bebidas">Ver bebidas</a>
+    </div>
+  </header>
+
+  <div class="toalha" aria-hidden="true"></div>
+
+  <div class="turno" role="group" aria-label="Escolher cardápio por horário">
+    <button type="button" data-turno="almoco" aria-pressed="true">Almoço</button>
+    <button type="button" data-turno="noite" aria-pressed="false">Noite</button>
+  </div>
+  <p class="turno-dica" id="turno-dica">Cardápio do almoço.</p>
+
+  <nav class="nav" aria-label="Seções do cardápio">
+    <ul>
+      <li data-sec="completa"><a href="#completa">Refeição completa</a></li>
+      <li data-sec="petiscos"><a href="#petiscos">Petiscos</a></li>
+      <li data-sec="espetinhos"><a href="#espetinhos">Espetinhos</a></li>
+      <li data-sec="almoco"><a href="#almoco">Almoço comercial</a></li>
+      <li data-sec="caldinhos"><a href="#caldinhos">Caldinhos</a></li>
+      <li data-sec="bebidas"><a href="#bebidas">Bebidas</a></li>
+      <li data-sec="doses"><a href="#doses">Doses e drinks</a></li>
+    </ul>
+  </nav>
+
+  <main class="palco">
+
+  <!-- ============ REFEIÇÃO COMPLETA ============ -->
+  <section class="sec" id="completa">
+    <h2>Refeição completa</h2>
+    <p class="sub">A carne na brasa <strong>com tudo junto</strong>: arroz, feijão, macarrão, farofa, maionese e vinagrete.</p>
+
+    <div class="chave" role="group" aria-label="Escolher tamanho da refeição completa">
+      <button type="button" data-alvo="completa" data-tam="meio" aria-pressed="true">Meio · serve 1 a 2</button>
+      <button type="button" data-alvo="completa" data-tam="completo" aria-pressed="false">Completo · serve 2 a 3</button>
+    </div>
+    <p class="chave-dica">Toque para ver o preço de cada tamanho.</p>
+
+    <ul class="lista" data-grupo="completa">
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Costela no Bafo <span class="tag tag-top">Mais pedido</span></p>
+          <p class="desc">Costela bovina assada lenta até desfiar no garfo.</p>
+        </div>
+        <p class="preco" data-meio="59,90" data-completo="94,90">59,90</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Cupim Casqueado</p>
+          <p class="desc">Cupim fatiado e tostado na brasa, casquinha crocante por fora.</p>
+        </div>
+        <p class="preco" data-meio="59,90" data-completo="94,90">59,90</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Picanha Bovina</p>
+          <p class="desc">Fatiada na hora, no ponto que você pedir.</p>
+        </div>
+        <p class="preco" data-meio="64,90" data-completo="99,90">64,90</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Maminha</p>
+          <p class="desc">Corte macio, grelhado na brasa.</p>
+        </div>
+        <p class="preco" data-meio="54,99" data-completo="84,90">54,99</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Costela Suína na Brasa</p>
+          <p class="desc">Ripa de costela suína dourada devagar.</p>
+        </div>
+        <p class="preco" data-meio="59,90" data-completo="75,90">59,90</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Picanha Suína</p>
+          <p class="desc">Suculenta e mais suave que a bovina.</p>
+        </div>
+        <p class="preco" data-meio="49,90" data-completo="69,90">49,90</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Galeto na Brasa</p>
+          <p class="desc">Frango temperado e assado na brasa.</p>
+        </div>
+        <p class="preco" data-meio="41,90" data-completo="59,90">41,90</p>
+      </li>
+      <li class="item" data-so="completo">
+        <div class="txt">
+          <p class="nome">Asinha à Milanesa <span class="tag tag-uni">Só no completo</span></p>
+          <p class="desc">Asas empanadas e fritas na hora.</p>
+        </div>
+        <p class="preco" data-meio="54,90" data-completo="54,90">54,90</p>
+      </li>
+    </ul>
+
+    <div class="destaque">
+      <p class="nome">Mistão da Casa</p>
+      <p class="desc">Cupim, costela no bafo, costela suína, galeto e toscana — mais os acompanhamentos. Serve de 3 a 4 pessoas.</p>
+      <p class="preco">99,90</p>
+    </div>
+
+    <div class="grupo">
+      <h3>Para completar</h3>
+      <ul class="lista">
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Porção extra pequena</p>
+          </div>
+          <p class="preco">5,99</p>
+        </li>
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Porção extra grande</p>
+            <p class="desc">Arroz, feijão, macarrão e maionese.</p>
+          </div>
+          <p class="preco">8,99</p>
+        </li>
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Farofa e vinagrete</p>
+          </div>
+          <p class="preco">3,00</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ PETISCOS ============ -->
+  <section class="sec" id="petiscos">
+    <h2>Petiscos pra dividir</h2>
+    <p class="sub">Só a carne, do jeito que a mesa gosta. <strong>Acompanha farofa e vinagrete.</strong></p>
+
+    <div class="chave" role="group" aria-label="Escolher tamanho do petisco">
+      <button type="button" data-alvo="petiscos" data-tam="meio" aria-pressed="true">Meia · serve 2</button>
+      <button type="button" data-alvo="petiscos" data-tam="completo" aria-pressed="false">Inteira · serve 3 a 4</button>
+    </div>
+    <p class="chave-dica">Toque para ver o preço de cada tamanho.</p>
+
+    <ul class="lista" data-grupo="petiscos">
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Costela no Bafo <span class="tag tag-top">Mais pedido</span></p>
+          <p class="desc">A carne da casa, no osso, desfiando.</p>
+        </div>
+        <p class="preco" data-meio="59,99" data-completo="79,99">59,99</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Cupim Casqueado</p>
+          <p class="desc">Fatias tostadas na brasa.</p>
+        </div>
+        <p class="preco" data-meio="59,99" data-completo="79,99">59,99</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Picanha Bovina</p>
+          <p class="desc">Fatiada na hora.</p>
+        </div>
+        <p class="preco" data-meio="59,99" data-completo="79,99">59,99</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Maminha</p>
+          <p class="desc">Macia, grelhada na brasa.</p>
+        </div>
+        <p class="preco" data-meio="49,99" data-completo="69,99">49,99</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Costela Suína</p>
+          <p class="desc">Ripas douradas na brasa.</p>
+        </div>
+        <p class="preco" data-meio="44,99" data-completo="59,99">44,99</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Picanha Suína</p>
+          <p class="desc">Corte suculento e mais suave.</p>
+        </div>
+        <p class="preco" data-meio="42,99" data-completo="64,99">42,99</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Galeto</p>
+          <p class="desc">Frango na brasa, temperado da casa.</p>
+        </div>
+        <p class="preco" data-meio="36,99" data-completo="49,99">36,99</p>
+      </li>
+      <li class="item">
+        <div class="txt">
+          <p class="nome">Batata Frita <span class="tag tag-top">Mais pedido</span></p>
+          <p class="desc">Sequinha, saída direto da fritadeira.</p>
+        </div>
+        <p class="preco" data-meio="14,99" data-completo="29,99">14,99</p>
+      </li>
+    </ul>
+
+    <div class="grupo">
+      <h3>Porção única</h3>
+      <ul class="lista">
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Camarão ao alho e óleo</p>
+            <p class="desc">Camarão salteado no alho, azeite e cheiro-verde.</p>
+          </div>
+          <p class="preco">43,99</p>
+        </li>
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Calabresa com fritas</p>
+            <p class="desc">Calabresa acebolada sobre batata frita.</p>
+          </div>
+          <p class="preco">34,99</p>
+        </li>
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Peixe em posta</p>
+            <p class="desc">Posta frita na hora.</p>
+          </div>
+          <p class="preco">32,99</p>
+        </li>
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Agulhinha frita</p>
+            <p class="desc">6 unidades, fritas na hora e crocantes.</p>
+          </div>
+          <p class="preco">24,99</p>
+        </li>
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Linguiça matuta</p>
+            <p class="desc">Linguiça artesanal na brasa.</p>
+          </div>
+          <p class="preco">24,99</p>
+        </li>
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Torresmo</p>
+            <p class="desc">Crocante, do jeito que pede a cerveja.</p>
+          </div>
+          <p class="preco">19,99</p>
+        </li>
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Pastel de queijo</p>
+            <p class="desc">Frito na hora.</p>
+          </div>
+          <p class="preco">17,99</p>
+        </li>
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Asa de frango — 5 unidades</p>
+            <p class="desc">Temperadas e fritas.</p>
+          </div>
+          <p class="preco">14,99</p>
+        </li>
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Asa de frango — 10 unidades</p>
+            <p class="desc">Para a mesa toda.</p>
+          </div>
+          <p class="preco">29,99</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ ESPETINHOS ============ -->
+  <section class="sec" id="espetinhos">
+    <h2>Espetinho na brasa</h2>
+    <p class="sub">Feitos na hora, na brasa, o dia inteiro.</p>
+    <ul class="lista">
+      <li class="item"><div class="txt"><p class="nome">Carne <span class="tag tag-top">Mais pedido</span></p></div><p class="preco">10,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Carne de sol com queijo coalho</p></div><p class="preco">12,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Carne com bacon</p></div><p class="preco">11,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Frango com bacon</p></div><p class="preco">11,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Frango com queijo</p></div><p class="preco">10,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Coração de frango</p></div><p class="preco">10,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Cordão de fígado</p></div><p class="preco">10,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Fraldinha</p></div><p class="preco">10,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Bode</p></div><p class="preco">11,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Costela de carneiro</p></div><p class="preco">11,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Mistão</p><p class="desc">Um pouco de cada carne no mesmo espeto.</p></div><p class="preco">10,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Queijo coalho assado</p></div><p class="preco">9,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Bananinha</p><p class="desc">Banana na brasa com canela.</p></div><p class="preco">10,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Pão de alho</p></div><p class="preco">5,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Linguiça matuta</p><p class="desc">Espeto grande.</p></div><p class="preco">19,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Picanha</p><p class="desc">Espeto premium, corte nobre.</p></div><p class="preco">29,99</p></li>
+    </ul>
+
+    <div class="grupo">
+      <h3>No prato</h3>
+      <ul class="lista">
+        <li class="item">
+          <div class="txt">
+            <p class="nome">Jantinha de espetinho</p>
+            <p class="desc">Espetinho com arroz, feijão, macarrão, farofa, maionese e vinagrete.</p>
+          </div>
+          <p class="preco">17,99</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ ALMOÇO COMERCIAL ============ -->
+  <section class="sec" id="almoco">
+    <h2>Almoço comercial</h2>
+    <p class="sub">Prato individual, servido no capricho. <strong>Todos acompanham arroz, feijão, macarrão, farofa, maionese e vinagrete.</strong></p>
+
+    <div class="destaque">
+      <span class="tag tag-top">O mais pedido do almoço</span>
+      <p class="nome" style="margin-top:11px">Costela no Bafo</p>
+      <p class="desc">Costela bovina assada devagar até desprender do osso. É a carne que dá nome à casa — e o prato que mais sai no horário do almoço.</p>
+      <p class="preco">25,99</p>
+    </div>
+
+    <div class="grupo">
+      <h3>Também entre os mais pedidos</h3>
+      <ul class="lista">
+        <li class="item"><div class="txt"><p class="nome">Bife acebolado</p><p class="desc">Bife na chapa com bastante cebola dourada por cima.</p></div><p class="preco">23,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Fígado acebolado</p><p class="desc">Macio, na cebola e no alho, do jeito antigo.</p></div><p class="preco">19,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Costela guisada</p><p class="desc">Cozida devagar no próprio caldo, desmanchando no garfo.</p></div><p class="preco">21,99</p></li>
+      </ul>
+    </div>
+
+    <div class="grupo">
+      <h3>Também no almoço</h3>
+      <ul class="lista">
+        <li class="item"><div class="txt"><p class="nome">Bife a cavalo</p><p class="desc">O bife acebolado com ovo frito por cima, gema mole.</p></div><p class="preco">24,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Posta de peixe dourado</p><p class="desc">Posta grossa, frita na hora e dourada por fora.</p></div><p class="preco">24,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Filé de frango</p><p class="desc">Filé de peito grelhado na chapa com o tempero da casa.</p></div><p class="preco">22,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Asa à milanesa</p><p class="desc">5 unidades empanadas e fritas na hora.</p></div><p class="preco">20,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Bisteca suína</p><p class="desc">Bisteca no osso, grelhada na chapa.</p></div><p class="preco">20,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Galeto assado</p><p class="desc">Pedaço de galeto temperado e assado até dourar.</p></div><p class="preco">19,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Galinha guisada</p><p class="desc">Cozida devagar e servida no próprio molho.</p></div><p class="preco">19,99</p></li>
+      </ul>
+    </div>
+
+    <div class="grupo">
+      <h3>Pra completar o prato</h3>
+      <ul class="lista">
+        <li class="item"><div class="txt"><p class="nome">Caldinho de costela</p><p class="desc">Pra começar enquanto o prato não sai.</p></div><p class="preco">9,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Porção extra grande</p><p class="desc">Arroz, feijão, macarrão e maionese.</p></div><p class="preco">8,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Porção extra pequena</p></div><p class="preco">5,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Farofa e vinagrete</p></div><p class="preco">3,00</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ CALDINHOS ============ -->
+  <section class="sec" id="caldinhos">
+    <h2>Caldinhos</h2>
+    <p class="sub">Servido quente, no copo.</p>
+    <ul class="lista">
+      <li class="item"><div class="txt"><p class="nome">Caldinho de costela</p></div><p class="preco">9,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Caldinho de feijão</p></div><p class="preco">9,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Caldinho de camarão</p></div><p class="preco">9,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Caldinho de peixe</p></div><p class="preco">9,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Caldinho de marisco</p></div><p class="preco">9,99</p></li>
+      <li class="item"><div class="txt"><p class="nome">Caldinho de caldeirada</p><p class="desc">Camarão, peixe e marisco juntos.</p></div><p class="preco">14,99</p></li>
+    </ul>
+  </section>
+
+  <!-- ============ BEBIDAS ============ -->
+  <section class="sec" id="bebidas">
+    <h2>Bebidas</h2>
+    <p class="sub">Tudo gelado.</p>
+
+    <div class="grupo">
+      <h3>Cerveja garrafa 600 ml</h3>
+      <ul class="lista">
+        <li class="item"><div class="txt"><p class="nome">Brahma</p></div><p class="preco">10,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Devassa</p></div><p class="preco">10,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Amstel</p></div><p class="preco">10,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Spaten</p></div><p class="preco">13,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Heineken</p></div><p class="preco">16,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Stella Artois</p></div><p class="preco">16,99</p></li>
+      </ul>
+    </div>
+
+    <div class="grupo">
+      <h3>Cerveja lata e long neck</h3>
+      <ul class="lista">
+        <li class="item"><div class="txt"><p class="nome">Itapaiva latão</p></div><p class="preco">6,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Devassa latão</p></div><p class="preco">6,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Brahma latão</p></div><p class="preco">7,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Amstel latão</p></div><p class="preco">7,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Brahma Zero lata</p></div><p class="preco">8,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Budweiser long neck</p></div><p class="preco">7,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Corona long neck</p></div><p class="preco">9,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Heineken long neck</p></div><p class="preco">9,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Heineken Zero</p></div><p class="preco">11,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Ice</p></div><p class="preco">11,99</p></li>
+      </ul>
+    </div>
+
+    <div class="grupo">
+      <h3>Chopp</h3>
+      <ul class="lista">
+        <li class="item"><div class="txt"><p class="nome">Chopp caneca 330 ml</p></div><p class="preco">13,99</p></li>
+      </ul>
+    </div>
+
+    <div class="grupo">
+      <h3>Sem álcool</h3>
+      <ul class="lista">
+        <li class="item"><div class="txt"><p class="nome">Água mineral</p></div><p class="preco">2,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Água com gás</p></div><p class="preco">4,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Refrigerante lata</p></div><p class="preco">5,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Coca-Cola lata</p></div><p class="preco">5,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Suco no copo</p></div><p class="preco">5,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">H2OH! Limoneto</p></div><p class="preco">7,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Guaraná 1 litro</p></div><p class="preco">11,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Coca-Cola 1 litro</p></div><p class="preco">11,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Suco na jarra</p><p class="desc">Serve 3 copos.</p></div><p class="preco">11,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Coca-Cola 1 litro pet</p></div><p class="preco">13,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Energético 250 ml</p></div><p class="preco">14,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Coca-Cola 2 litros</p></div><p class="preco">17,99</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ DOSES E DRINKS ============ -->
+  <section class="sec" id="doses">
+    <h2>Doses e drinks</h2>
+    <p class="sub">Venda proibida para menores de 18 anos.</p>
+
+    <div class="grupo">
+      <h3>Drinks</h3>
+      <ul class="lista">
+        <li class="item"><div class="txt"><p class="nome">Caipirinha</p><p class="desc">Limão, açúcar e cachaça.</p></div><p class="preco">8,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Caipiroska</p><p class="desc">Feita com vodka.</p></div><p class="preco">10,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Coquetel de morango sem álcool</p></div><p class="preco">14,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Coquetel de morango com álcool</p></div><p class="preco">18,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Gin tropical</p></div><p class="preco">18,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Gin melancia</p></div><p class="preco">18,99</p></li>
+      </ul>
+    </div>
+
+    <div class="grupo">
+      <h3>Doses</h3>
+      <ul class="lista">
+        <li class="item"><div class="txt"><p class="nome">Pitú</p></div><p class="preco">3,49</p></li>
+        <li class="item"><div class="txt"><p class="nome">Conhaque Dreher</p></div><p class="preco">3,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Vodka Smirnoff</p></div><p class="preco">5,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Vodka Chohfi</p></div><p class="preco">5,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Campari</p></div><p class="preco">6,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Conhaque Domecq</p></div><p class="preco">6,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Whisky Black &amp; White</p></div><p class="preco">6,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Conhaque de Alcatrão</p></div><p class="preco">8,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Whisky White Horse</p></div><p class="preco">9,99</p></li>
+        <li class="item"><div class="txt"><p class="nome">Whisky Johnnie Walker</p></div><p class="preco">9,99</p></li>
+      </ul>
+    </div>
+
+    <div class="grupo">
+      <h3>Garrafa</h3>
+      <ul class="lista">
+        <li class="item"><div class="txt"><p class="nome">Pitú lata</p></div><p class="preco">11,99</p></li>
+      </ul>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="rodape" id="contato">
+    <h2>Costelão Gaúcho</h2>
+    <p>Pedidos e reservas: <a href="https://wa.me/5581984499419">(81) 98449-9419</a></p>
+    <p>Aberto todos os dias · Almoço, petisco e espetinho na brasa.</p>
+    <div class="acoes" style="justify-content:flex-start">
+      <a class="btn btn-zap" href="https://wa.me/5581984499419" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+    </div>
+    <p class="aviso">
+      Preços sujeitos a alteração sem aviso prévio. Imagens meramente ilustrativas.<br>
+      Venda de bebida alcoólica proibida para menores de 18 anos — Lei nº 13.106/2015.<br>
+      A taxa de serviço de 10% é opcional.
+    </p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // ----- turno: almoco x noite -----
+  var dica = document.getElementById('turno-dica');
+  function aplicarTurno(t, auto){
+    document.body.classList.toggle('t-almoco', t === 'almoco');
+    document.body.classList.toggle('t-noite',  t === 'noite');
+    document.querySelectorAll('.turno button').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.turno === t));
+    });
+    var nome = (t === 'almoco') ? 'do almo\u00e7o' : 'da noite';
+    dica.textContent = auto
+      ? 'Card\u00e1pio ' + nome + ' \u2014 escolhido pelo hor\u00e1rio. Toque para trocar.'
+      : 'Card\u00e1pio ' + nome + '.';
+  }
+  var hora = new Date().getHours();
+  aplicarTurno((hora >= 10 && hora < 16) ? 'almoco' : 'noite', true);
+  document.querySelectorAll('.turno button').forEach(function(b){
+    b.addEventListener('click', function(){ aplicarTurno(b.dataset.turno, false); });
+  });
+
+  // ----- chave meio / completo -----
+  document.querySelectorAll('.chave button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var alvo = btn.dataset.alvo, tam = btn.dataset.tam;
+      document.querySelectorAll('.chave button[data-alvo="'+alvo+'"]').forEach(function(b){
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      var lista = document.querySelector('.lista[data-grupo="'+alvo+'"]');
+      if(!lista) return;
+      lista.querySelectorAll('.item').forEach(function(item){
+        var so = item.dataset.so;
+        item.hidden = !!(so && so !== tam);
+        var p = item.querySelector('.preco');
+        if(p && p.dataset[tam]){
+          p.style.opacity = '0';
+          setTimeout(function(){ p.textContent = p.dataset[tam]; p.style.opacity = '1'; }, 90);
+        }
+      });
+    });
+  });
+
+  // ----- destacar seção na navegação -----
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+  var mapa = {};
+  links.forEach(function(a){ mapa[a.getAttribute('href').slice(1)] = a; });
+
+  var obs = new IntersectionObserver(function(entradas){
+    entradas.forEach(function(e){
+      if(!e.isIntersecting) return;
+      links.forEach(function(a){ a.removeAttribute('aria-current'); });
+      var ativo = mapa[e.target.id];
+      if(ativo){
+        ativo.setAttribute('aria-current','true');
+        ativo.scrollIntoView({block:'nearest', inline:'center', behavior:'smooth'});
+      }
+    });
+  }, {rootMargin:'-15% 0px -70% 0px'});
+
+  document.querySelectorAll('.sec').forEach(function(s){ obs.observe(s); });
+})();
+</script>
+</body>
+</html>
