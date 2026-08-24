@@ -3,438 +3,305 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Costelão Gaúcho — Costela no bafo e espeto na brasa em Afogados, Recife</title>
-<meta name="description" content="Boteco e churrascaria em Afogados, Recife. Almoço comercial de 19,99 a 25,99, petisco pra dividir e espetinho na brasa. Todo dia, das 11h às 23h.">
-<meta name="theme-color" content="#16110E">
+<title>Costelão Gaúcho — Churrascaria e boteco em Afogados, Recife</title>
+<meta name="description" content="Churrascaria e boteco em Afogados, Recife. Costela no bafo, espeto na brasa e almoço comercial de 19,99 a 25,99. Todo dia, das 11h às 23h. Rua Frederico Cúrio, 106.">
+<meta name="theme-color" content="#8E2B14">
 <meta property="og:title" content="Costelão Gaúcho — Afogados, Recife">
-<meta property="og:description" content="Costela no bafo, espeto na brasa e almoço todo dia das 11h às 23h.">
+<meta property="og:description" content="Costela no bafo, espeto na brasa e almoço comercial todo dia, das 11h às 23h.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>document.documentElement.className += " js";</script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --carvao:#16110E;
-    --carvao-2:#241C17;
-    --brasa:#D2380E;
-    --brasa-viva:#FF6B2C;
-    --osso:#EDE7DA;
-    --osso-2:#E2DACA;
-    --cinza:#6E6357;
-    --amarelo:#EFB01F;
-    --zap:#1F7A3D;
-    --display:"Alfa Slab One", Georgia, serif;
-    --texto:"Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --max:680px;
+    --creme:#FBF7F1;
+    --areia:#F3ECE1;
+    --borda:#E4DACA;
+    --carne:#8E2B14;
+    --brasa:#C4441C;
+    --tinta:#241D18;
+    --cinza:#6D625A;
+    --verde:#1F7A3D;
+    --fonte:"Figtree",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --largo:1120px;
     --gut:22px;
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-  body{
-    margin:0;background:var(--osso);color:var(--carvao);
-    font-family:var(--texto);font-size:16px;line-height:1.5;
-    -webkit-font-smoothing:antialiased;overflow-x:hidden;
-  }
-  .lp-wrap{max-width:var(--max);margin:0 auto;background:var(--osso);overflow:hidden}
+  body{margin:0;background:var(--creme);color:var(--tinta);font-family:var(--fonte);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:inherit}
+  h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.028em;line-height:1.15}
+  .cx{max-width:var(--largo);margin:0 auto;padding:0 var(--gut);width:100%}
+  .rot{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--brasa);margin:0 0 12px}
 
-  /* ===================== HERO ===================== */
-  .lp-hero{
-    position:relative;background:var(--carvao);color:var(--osso);
-    padding:64px var(--gut) 52px;text-align:center;overflow:hidden;
-  }
-  .lp-hero__brasa{
-    position:absolute;left:50%;bottom:-42%;transform:translateX(-50%);
-    width:150%;aspect-ratio:1/1;border-radius:50%;pointer-events:none;
-    background:radial-gradient(circle, rgba(255,107,44,.42) 0%, rgba(210,56,14,.20) 38%, transparent 66%);
-    opacity:.62;
-  }
-  .lp-hero > *{position:relative;z-index:1}
-  .lp-hero > .lp-hero__brasa{position:absolute;z-index:0}
-
-  .lp-marca{
-    font-family:var(--display);text-transform:uppercase;
-    font-size:clamp(42px,12.5vw,64px);line-height:.88;letter-spacing:-1px;
-    margin:0;
-  }
-  .lp-marca em{font-style:normal;color:var(--brasa-viva);display:block}
-
-  .lp-status{
-    display:inline-flex;align-items:center;gap:9px;margin:22px 0 0;
-    padding:8px 17px;border-radius:999px;
-    font-size:12.5px;font-weight:700;letter-spacing:.03em;
-    background:rgba(255,255,255,.06);border:1px solid #3A312B;color:#BCAE9E;
-  }
-  .lp-status i{width:8px;height:8px;border-radius:50%;background:#7C7168;flex:none}
-  .lp-status.is-on{color:#8FE0AC;border-color:#2A5B3C;background:rgba(31,122,61,.15)}
-  .lp-status.is-on i{background:#3FCB77}
-
-  .lp-tese{
-    font-family:var(--display);font-size:clamp(24px,6.8vw,33px);line-height:1.14;
-    margin:26px auto 0;max-width:15ch;letter-spacing:-.4px;
-  }
-  .lp-tese b{color:var(--amarelo);font-weight:400}
-  .lp-sub{margin:15px auto 0;max-width:34ch;font-size:14.5px;color:#BCAE9E;line-height:1.55}
-
-  .lp-btns{display:flex;gap:11px;justify-content:center;margin-top:28px;flex-wrap:wrap}
-  .lp-btn{
+  .bt{
     display:inline-flex;align-items:center;justify-content:center;
-    padding:15px 27px;border-radius:999px;text-decoration:none;
-    font-size:15px;font-weight:700;border:1.5px solid transparent;
-    transition:transform .12s ease, filter .18s ease;
+    padding:14px 26px;border-radius:9px;text-decoration:none;
+    font-size:15px;font-weight:700;border:2px solid transparent;transition:.18s ease;
   }
-  .lp-btn:active{transform:scale(.96)}
-  .lp-btn:hover{filter:brightness(1.08)}
-  .lp-btn--brasa{background:var(--brasa);color:#fff}
-  .lp-btn--zap{background:var(--zap);color:#fff}
-  .lp-btn--linha{border-color:#4A403A;color:var(--osso)}
-  .lp-btn:focus-visible{outline:3px solid var(--amarelo);outline-offset:3px}
+  .bt--brasa{background:var(--brasa);color:#fff}
+  .bt--brasa:hover{background:var(--carne)}
+  .bt--zap{background:var(--verde);color:#fff}
+  .bt--zap:hover{background:#1A6633}
+  .bt--linha{border-color:var(--borda);color:var(--tinta)}
+  .bt--linha:hover{border-color:var(--brasa);color:var(--brasa)}
+  .bt:focus-visible{outline:3px solid var(--brasa);outline-offset:3px}
+  .bts{display:flex;gap:11px;flex-wrap:wrap;margin-top:28px}
 
-  /* ===================== TOALHA + LETREIRO ===================== */
-  .lp-toalha{
-    height:22px;
-    background-color:#fff;
-    background-image:
-      repeating-linear-gradient(90deg, rgba(210,56,14,.55) 0 11px, transparent 11px 22px),
-      repeating-linear-gradient(0deg,  rgba(210,56,14,.55) 0 11px, transparent 11px 22px);
-  }
-  .lp-letreiro{
-    background:var(--carvao-2);color:#C6B7A5;overflow:hidden;
-    padding:13px 0;white-space:nowrap;
-    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
-            mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
-  }
-  .lp-letreiro__fita{
-    display:inline-block;animation:lp-desliza 34s linear infinite;
-    font-size:13px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
-  }
-  .lp-letreiro__fita span{margin:0 5px;color:var(--brasa-viva)}
-  @keyframes lp-desliza{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  /* ---------- navegação ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.95);backdrop-filter:blur(9px);border-bottom:1px solid var(--borda)}
+  .nav__in{display:flex;align-items:center;justify-content:space-between;gap:18px;height:64px}
+  .nav__marca{font-weight:800;font-size:17.5px;letter-spacing:-.03em;text-decoration:none;white-space:nowrap}
+  .nav__marca span{color:var(--brasa)}
+  .nav__links{display:none;gap:26px;list-style:none;margin:0;padding:0}
+  .nav__links a{font-size:14.5px;font-weight:600;text-decoration:none;color:var(--cinza)}
+  .nav__links a:hover{color:var(--carne)}
+  .nav__zap{display:inline-flex;align-items:center;background:var(--verde);color:#fff;padding:10px 18px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap}
+  @media (min-width:900px){.nav__links{display:flex}}
 
-  /* ===================== BLOCOS ===================== */
-  .lp-sec{padding:44px var(--gut) 0}
-  .lp-olho{
-    display:inline-block;font-size:10.5px;font-weight:700;
-    text-transform:uppercase;letter-spacing:.14em;color:var(--brasa);
-    margin:0 0 9px;
+  /* ---------- capa ---------- */
+  .capa{padding:72px 0 66px;border-bottom:1px solid var(--borda)}
+  .capa h1{font-size:clamp(40px,7.2vw,74px);letter-spacing:-.04em}
+  .capa h1 span{color:var(--brasa)}
+  .capa .frase{margin:20px 0 0;max-width:46ch;font-size:clamp(16.5px,1.8vw,19px);color:var(--cinza);line-height:1.55}
+  .hora{
+    display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;padding:7px 14px;border-radius:999px;
+    background:var(--areia);border:1px solid var(--borda);
+    font-size:12px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--cinza);
   }
-  .lp-sec h2{
-    font-family:var(--display);text-transform:uppercase;
-    font-size:clamp(22px,5.6vw,28px);line-height:1.1;letter-spacing:-.3px;margin:0;
-  }
-  .lp-sec .lp-lead{margin:11px 0 0;font-size:14.5px;color:var(--cinza);max-width:42ch}
+  .hora i{width:7px;height:7px;border-radius:50%;background:#A2968A}
+  .hora.aberto{color:#186B34;background:#E7F3EA;border-color:#C3E2CD}
+  .hora.aberto i{background:#25A354}
+  .capa__pe{margin:34px 0 0;padding-top:22px;border-top:1px solid var(--borda);font-size:15px;color:var(--cinza)}
+  .capa__pe b{color:var(--tinta);font-weight:700}
 
-  .lp-cards{display:grid;gap:12px;margin-top:22px}
-  .lp-card{
-    border:1px solid var(--osso-2);border-radius:15px;background:#fff;padding:18px 19px;
-  }
-  .lp-card h3{font-family:var(--display);font-size:16px;text-transform:uppercase;margin:0;line-height:1.15}
-  .lp-card p{margin:7px 0 0;font-size:13.5px;color:var(--cinza);line-height:1.45}
+  /* ---------- tira ---------- */
+  .tira{background:var(--carne);color:#F7E9E0}
+  .tira ul{display:grid;gap:2px;list-style:none;margin:0;padding:26px 0;text-align:center}
+  .tira li{font-size:14.5px;padding:8px 0}
+  .tira b{display:block;font-size:17.5px;font-weight:800;color:#fff;letter-spacing:-.022em;margin-bottom:2px}
+  @media (min-width:760px){.tira ul{grid-template-columns:repeat(3,1fr);padding:32px 0}}
 
-  /* ---- painel do turno ---- */
-  .lp-painel{
-    margin-top:24px;border-radius:18px;padding:24px 21px;
-    background:var(--carvao);color:var(--osso);
-  }
-  .lp-painel--quieto{
-    background:transparent;color:var(--carvao);
-    border:1px solid var(--osso-2);
-  }
-  .lp-painel__topo{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:5px}
-  .lp-selo{
-    font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
-    background:var(--amarelo);color:#3B2A05;padding:4px 9px;border-radius:5px;
-  }
-  .lp-selo--frio{background:var(--osso-2);color:var(--cinza)}
-  .lp-painel h3{font-family:var(--display);font-size:21px;text-transform:uppercase;margin:0;line-height:1.12}
-  .lp-painel__nota{margin:9px 0 0;font-size:13.5px;line-height:1.5;color:#BCAE9E}
-  .lp-painel--quieto .lp-painel__nota{color:var(--cinza)}
+  /* ---------- seções ---------- */
+  .sec{padding:70px 0}
+  .sec--areia{background:var(--areia)}
+  .sec h2{font-size:clamp(26px,3.5vw,38px)}
+  .lead{margin:16px 0 0;font-size:16.5px;color:var(--cinza);max-width:58ch;line-height:1.65}
 
-  .lp-precos{list-style:none;margin:19px 0 0;padding:0}
-  .lp-precos li{
-    display:flex;align-items:baseline;gap:14px;
-    padding:11px 0;border-bottom:1px solid rgba(237,231,218,.13);
-  }
-  .lp-painel--quieto .lp-precos li{border-bottom-color:rgba(30,23,19,.11)}
-  .lp-precos li:last-child{border-bottom:0}
-  .lp-precos .n{flex:1;min-width:0;font-size:15px;font-weight:500}
-  .lp-precos .n small{display:block;font-size:12px;color:#9A8C7E;font-weight:400;margin-top:2px}
-  .lp-painel--quieto .lp-precos .n small{color:var(--cinza)}
-  .lp-precos .v{
-    font-family:var(--display);font-size:20px;color:var(--amarelo);
-    white-space:nowrap;font-variant-numeric:tabular-nums;
-  }
-  .lp-painel--quieto .lp-precos .v{color:var(--brasa)}
-  .lp-precos .v sup{font-size:10px;font-family:var(--texto);font-weight:700;vertical-align:top;top:.35em;position:relative}
+  .pratos{list-style:none;margin:30px 0 0;padding:0;border-top:1px solid var(--borda);max-width:620px}
+  .pratos li{display:flex;align-items:baseline;gap:18px;padding:15px 0;border-bottom:1px solid var(--borda)}
+  .pratos .n{flex:1;min-width:0;font-size:16.5px;font-weight:700;letter-spacing:-.015em}
+  .pratos .n small{display:block;font-size:13.5px;font-weight:400;color:var(--cinza);margin-top:2px;letter-spacing:0}
+  .pratos .v{font-size:18px;font-weight:800;color:var(--carne);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .pratos .v sup{font-size:11px;font-weight:700;position:relative;top:-.55em;color:var(--cinza)}
 
-  .lp-linkcard{
-    display:flex;align-items:center;justify-content:space-between;gap:14px;
-    margin-top:18px;padding:15px 18px;border-radius:12px;text-decoration:none;
-    background:rgba(255,255,255,.07);border:1px solid #3A312B;color:var(--osso);
-    transition:background .18s ease;
-  }
-  .lp-linkcard:hover{background:rgba(255,255,255,.12)}
-  .lp-linkcard b{font-family:var(--display);font-weight:400;font-size:14.5px;text-transform:uppercase}
-  .lp-linkcard i{font-style:normal;color:var(--brasa-viva);font-size:21px;flex:none}
+  .grade{display:grid;gap:16px;margin-top:36px;grid-template-columns:1fr}
+  .cartao{background:#fff;border:1px solid var(--borda);border-radius:14px;padding:23px 22px}
+  .sec--areia .cartao{background:var(--creme)}
+  .cartao h3{font-size:18px;margin:0 0 9px}
+  .cartao p{margin:0;font-size:14.5px;color:var(--cinza);line-height:1.55}
+  .cartao .preco{margin-top:13px;font-size:14.5px;font-weight:700;color:var(--carne)}
+  @media (min-width:680px){.grade{grid-template-columns:repeat(2,1fr)}}
+  @media (min-width:1000px){.grade{grid-template-columns:repeat(4,1fr)}}
 
-  /* ---- onde e quando ---- */
-  .lp-info{margin:22px 0 0;border:1px solid var(--osso-2);border-radius:15px;background:#fff;overflow:hidden}
-  .lp-info > div{padding:16px 19px;border-bottom:1px solid var(--osso-2)}
-  .lp-info > div:last-child{border-bottom:0}
-  .lp-info dt{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:var(--brasa);margin:0 0 5px}
-  .lp-info dd{margin:0;font-size:14.5px;line-height:1.45}
-  .lp-info dd small{display:block;font-size:12.5px;color:var(--cinza);margin-top:4px}
-
-  /* ---- fechamento ---- */
-  .lp-fim{
-    margin-top:44px;background:var(--carvao);color:var(--osso);
-    padding:46px var(--gut);text-align:center;position:relative;overflow:hidden;
-  }
-  .lp-fim__brasa{
-    position:absolute;left:50%;top:-58%;transform:translateX(-50%);
-    width:135%;aspect-ratio:1/1;border-radius:50%;pointer-events:none;
-    background:radial-gradient(circle, rgba(255,107,44,.30) 0%, transparent 62%);
-  }
-  .lp-fim > *{position:relative;z-index:1}
-  .lp-fim > .lp-fim__brasa{position:absolute;z-index:0}
-  .lp-fim h2{font-family:var(--display);text-transform:uppercase;font-size:clamp(22px,5.8vw,29px);line-height:1.12;margin:0 auto;max-width:16ch}
-  .lp-fim .lp-tel{margin:19px 0 0;font-size:19px;font-weight:700;letter-spacing:.02em}
-  .lp-fim .lp-mini{margin:24px auto 0;padding-top:19px;border-top:1px solid #322A24;font-size:11.5px;line-height:1.55;color:#8C7F73;max-width:38ch}
-
-  /* ===================== MOVIMENTO ===================== */
-  .js .lp-entra{opacity:0;transform:translateY(22px)}
-  .js .lp-entra.lp-visivel{
-    opacity:1;transform:none;
-    transition:opacity .62s cubic-bezier(.22,.7,.3,1), transform .62s cubic-bezier(.22,.7,.3,1);
+  .dados{list-style:none;margin:32px 0 0;padding:0;border-top:1px solid var(--borda)}
+  .dados li{padding:18px 0;border-bottom:1px solid var(--borda)}
+  .dados dt{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--brasa);margin-bottom:5px}
+  .dados dd{margin:0;font-size:16px;line-height:1.55}
+  .dados dd small{display:block;font-size:14px;color:var(--cinza);margin-top:4px}
+  .dados a{color:var(--carne);font-weight:600}
+  @media (min-width:860px){
+    .dados li{display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:baseline}
+    .dados dt{margin-bottom:0}
   }
 
-  .lp-hero__brasa{animation:lp-respira 7.5s ease-in-out infinite}
-  @keyframes lp-respira{
-    0%,100%{opacity:.52;transform:translateX(-50%) scale(1)}
-    50%    {opacity:.78;transform:translateX(-50%) scale(1.07)}
-  }
+  /* ---------- rodapé ---------- */
+  .pe{background:var(--tinta);color:#B6A99E;padding:54px 0 32px}
+  .pe__marca{font-size:21px;font-weight:800;color:#fff;letter-spacing:-.03em;margin:0 0 7px}
+  .pe__grid{display:grid;gap:28px}
+  .pe h3{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#8A7C71;margin:0 0 10px}
+  .pe p{margin:0 0 6px;font-size:15px;line-height:1.6}
+  .pe a{color:#fff;font-weight:600}
+  .pe__fim{margin-top:34px;padding-top:22px;border-top:1px solid #3A302A;font-size:12.5px;line-height:1.6;color:#7C6F65}
+  @media (min-width:760px){.pe__grid{grid-template-columns:1.3fr 1fr 1fr}}
 
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-    .js .lp-entra{opacity:1!important;transform:none!important}
-    .lp-letreiro__fita{animation:none!important}
+  /* ---------- movimento ---------- */
+  .js .up{opacity:0;transform:translateY(15px)}
+  .js .up.vis{opacity:1;transform:none;transition:opacity .5s ease,transform .5s cubic-bezier(.2,.65,.3,1)}
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+    .js .up{opacity:1!important;transform:none!important}
   }
 </style>
+<script>document.documentElement.className+=" js";</script>
 </head>
 <body>
-<div class="lp-wrap">
 
-  <!-- ============ HERO ============ -->
-  <header class="lp-hero">
-    <div class="lp-hero__brasa" aria-hidden="true"></div>
+<nav class="nav">
+  <div class="cx nav__in">
+    <a class="nav__marca" href="#topo">Costelão <span>Gaúcho</span></a>
+    <ul class="nav__links">
+      <li><a href="#casa">A casa</a></li>
+      <li><a href="#almoco">Almoço</a></li>
+      <li><a href="#cardapio">Cardápio</a></li>
+      <li><a href="#onde">Onde estamos</a></li>
+    </ul>
+    <a class="nav__zap" href="https://wa.me/5581984499419" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</nav>
 
-    <h1 class="lp-marca lp-entra" style="--atraso:0ms">Costelão<em>Gaúcho</em></h1>
-
-    <p class="lp-status lp-entra" id="lp-status" style="--atraso:110ms">
-      <i aria-hidden="true"></i><span id="lp-status-txt">Todo dia, das 11h às 23h</span>
-    </p>
-
-    <p class="lp-tese lp-entra" id="lp-tese" style="--atraso:210ms">A brasa acende às onze da manhã.</p>
-    <p class="lp-sub lp-entra" id="lp-sub" style="--atraso:290ms">Almoço comercial, petisco pra dividir e espetinho na brasa. Em Afogados, todo dia.</p>
-
-    <div class="lp-btns lp-entra" style="--atraso:380ms">
-      <a class="lp-btn lp-btn--brasa" href="cardapio/">Ver o cardápio</a>
-      <a class="lp-btn lp-btn--zap" href="https://wa.me/5581984499419" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+<header class="capa" id="topo">
+  <div class="cx">
+    <p class="hora" id="hora"><i aria-hidden="true"></i><span id="hora-txt">Todo dia, das 11h às 23h</span></p>
+    <h1>Costelão <span>Gaúcho</span></h1>
+    <p class="frase">Churrascaria e boteco em Afogados. Costela no bafo, espeto na brasa e almoço comercial todo dia.</p>
+    <div class="bts">
+      <a class="bt bt--brasa" href="cardapio/">Ver o cardápio</a>
+      <a class="bt bt--linha" href="#onde">Como chegar</a>
     </div>
-  </header>
+    <p class="capa__pe"><b>Rua Frederico Cúrio, 106</b> — Afogados, Recife · <b>(81) 98449-9419</b></p>
+  </div>
+</header>
 
-  <div class="lp-toalha" aria-hidden="true"></div>
+<div class="tira">
+  <div class="cx">
+    <ul>
+      <li><b>Almoço de 19,99 a 25,99</b>Servido rápido, todo dia</li>
+      <li><b>Espeto na brasa</b>Feito na hora, o dia inteiro</li>
+      <li><b>Débito, crédito e Pix</b>Retirada pelo WhatsApp</li>
+    </ul>
+  </div>
+</div>
 
-  <!-- ============ LETREIRO ============ -->
-  <div class="lp-letreiro" aria-hidden="true">
-    <div class="lp-letreiro__fita">
-      Costela no bafo <span>·</span> Espeto na brasa <span>·</span> Costela guisada <span>·</span> Queijo coalho <span>·</span> Caldinho de costela <span>·</span> Bode <span>·</span> Torresmo <span>·</span> Chopp na caneca <span>·</span> Batata frita <span>·</span> Camarão no alho e óleo <span>·</span>
-      Costela no bafo <span>·</span> Espeto na brasa <span>·</span> Costela guisada <span>·</span> Queijo coalho <span>·</span> Caldinho de costela <span>·</span> Bode <span>·</span> Torresmo <span>·</span> Chopp na caneca <span>·</span> Batata frita <span>·</span> Camarão no alho e óleo <span>·</span>
+<section class="sec" id="casa">
+  <div class="cx">
+    <p class="rot up">A casa</p>
+    <h2 class="up">Doze horas por dia com o fogo aceso</h2>
+    <p class="lead up">O Costelão Gaúcho fica na Rua Frederico Cúrio, em Afogados. Abre às onze da manhã e só apaga a brasa às onze da noite.</p>
+    <p class="lead up">No almoço serve prato feito para quem trabalha ali perto e precisa comer bem e voltar rápido. À tarde e à noite o salão vira boteco, com espetinho saindo da brasa, petisco no meio da mesa e cerveja gelada.</p>
+  </div>
+</section>
+
+<section class="sec sec--areia" id="almoco">
+  <div class="cx">
+    <p class="rot up">Almoço comercial</p>
+    <h2 class="up">Os quatro que mais saem</h2>
+    <p class="lead up">Prato individual. Acompanha arroz, feijão, macarrão, farofa, maionese e vinagrete.</p>
+    <ul class="pratos up">
+      <li><span class="n">Costela no bafo<small>Assada devagar até desprender do osso</small></span><span class="v"><sup>R$</sup>25,99</span></li>
+      <li><span class="n">Bife acebolado<small>Na chapa, com cebola dourada</small></span><span class="v"><sup>R$</sup>23,99</span></li>
+      <li><span class="n">Costela guisada<small>Cozida devagar no próprio caldo</small></span><span class="v"><sup>R$</sup>21,99</span></li>
+      <li><span class="n">Fígado acebolado<small>Na cebola e no alho, do jeito antigo</small></span><span class="v"><sup>R$</sup>19,99</span></li>
+    </ul>
+    <div class="bts up">
+      <a class="bt bt--brasa" href="cardapio/">Ver os 11 pratos do almoço</a>
     </div>
   </div>
+</section>
 
-  <!-- ============ DA BRASA ============ -->
-  <section class="lp-sec">
-    <p class="lp-olho lp-entra">Da brasa</p>
-    <h2 class="lp-entra">Três coisas que a gente faz melhor</h2>
-    <p class="lp-lead lp-entra">Doze horas por dia com o fogo aceso, em Afogados.</p>
+<section class="sec" id="cardapio">
+  <div class="cx">
+    <p class="rot up">Cardápio</p>
+    <h2 class="up">Da brasa para a mesa</h2>
+    <p class="lead up">Meia porção serve duas pessoas, inteira serve até quatro. Tudo com farofa e vinagrete.</p>
 
-    <div class="lp-cards">
-      <div class="lp-card lp-entra">
+    <div class="grade">
+      <div class="cartao up">
         <h3>Costela no bafo</h3>
-        <p>Assada devagar até desprender do osso. É a carne que dá nome à casa e o prato que mais sai no almoço.</p>
+        <p>Assada devagar até desprender do osso. É a carne que dá nome à casa.</p>
+        <p class="preco">Meia 59,99 · Inteira 79,99</p>
       </div>
-      <div class="lp-card lp-entra">
-        <h3>Espeto na brasa</h3>
-        <p>Carne, frango com bacon, queijo coalho, bode, costela de carneiro. Feitos na hora, o dia inteiro.</p>
+      <div class="cartao up">
+        <h3>Espetinho na brasa</h3>
+        <p>Dezesseis tipos: carne, frango com bacon, queijo coalho, bode, costela de carneiro.</p>
+        <p class="preco">A partir de 9,99</p>
       </div>
-      <div class="lp-card lp-entra">
+      <div class="cartao up">
         <h3>Petisco pra dividir</h3>
-        <p>Meia porção serve dois, inteira serve até quatro. Sai com farofa e vinagrete, do jeito que a mesa gosta.</p>
+        <p>Cupim, picanha, maminha, galeto, camarão no alho e óleo, torresmo, batata frita.</p>
+        <p class="preco">De 14,99 a 79,99</p>
+      </div>
+      <div class="cartao up">
+        <h3>Caldinho</h3>
+        <p>Costela, feijão, camarão, peixe ou marisco. E a caldeirada com os três juntos.</p>
+        <p class="preco">9,99 · Caldeirada 14,99</p>
       </div>
     </div>
-  </section>
 
-  <!-- ============ PAINÉIS POR TURNO ============ -->
-  <section class="lp-sec" id="lp-turnos">
-
-    <div class="lp-painel lp-entra" id="lp-almoco">
-      <div class="lp-painel__topo">
-        <span class="lp-selo" id="lp-selo-almoco">Agora</span>
-      </div>
-      <h3>Almoço comercial</h3>
-      <p class="lp-painel__nota">Prato individual com arroz, feijão, macarrão, farofa, maionese e vinagrete. Sai rápido, dá tempo de voltar pro trabalho.</p>
-      <ul class="lp-precos">
-        <li><span class="n">Costela no bafo<small>Desfiando no garfo</small></span><span class="v"><sup>R$</sup>25,99</span></li>
-        <li><span class="n">Bife acebolado<small>Na chapa, com cebola dourada</small></span><span class="v"><sup>R$</sup>23,99</span></li>
-        <li><span class="n">Costela guisada<small>Cozida no próprio caldo</small></span><span class="v"><sup>R$</sup>21,99</span></li>
-        <li><span class="n">Fígado acebolado<small>Na cebola e no alho</small></span><span class="v"><sup>R$</sup>19,99</span></li>
-      </ul>
-      <a class="lp-linkcard" href="cardapio/"><b>Ver os 11 pratos do almoço</b><i aria-hidden="true">→</i></a>
+    <div class="bts up">
+      <a class="bt bt--brasa" href="cardapio/">Ver o cardápio completo</a>
     </div>
+  </div>
+</section>
 
-    <div class="lp-painel lp-painel--quieto lp-entra" id="lp-noite">
-      <div class="lp-painel__topo">
-        <span class="lp-selo lp-selo--frio" id="lp-selo-noite">A partir das 16h</span>
-      </div>
-      <h3>Depois que o sol cai</h3>
-      <p class="lp-painel__nota">O salão vira bar. Espeto saindo da brasa, petisco no meio da mesa e cerveja gelada até as onze da noite.</p>
-      <ul class="lp-precos">
-        <li><span class="n">Espetinho de carne</span><span class="v"><sup>R$</sup>10,99</span></li>
-        <li><span class="n">Caldinho de costela</span><span class="v"><sup>R$</sup>9,99</span></li>
-        <li><span class="n">Torresmo</span><span class="v"><sup>R$</sup>19,99</span></li>
-        <li><span class="n">Chopp na caneca<small>330 ml</small></span><span class="v"><sup>R$</sup>13,99</span></li>
-      </ul>
-    </div>
-
-  </section>
-
-  <!-- ============ ONDE E QUANDO ============ -->
-  <section class="lp-sec">
-    <p class="lp-olho lp-entra">Onde e quando</p>
-    <h2 class="lp-entra">Rua Frederico Cúrio, 106</h2>
-
-    <dl class="lp-info lp-entra">
-      <div>
-        <dt>Endereço</dt>
-        <dd>Rua Frederico Cúrio, 106 — Afogados<br>Recife, PE · CEP 50830-370
-          <small><a href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Frederico+C%C3%BArio%2C+106+-+Afogados%2C+Recife+-+PE%2C+50830-370" target="_blank" rel="noopener">Abrir no Google Maps →</a></small>
-        </dd>
-      </div>
-      <div><dt>Horário</dt><dd>Todos os dias, das 11h às 23h</dd></div>
-      <div><dt>Pagamento</dt><dd>Débito, crédito e Pix</dd></div>
-      <div><dt>Retirada</dt><dd>Peça pelo WhatsApp e retire no local<small>Ainda não fazemos entrega em domicílio.</small></dd></div>
-      <div><dt>Instagram</dt><dd><a href="https://instagram.com/costelaogauchorecife" target="_blank" rel="noopener">@costelaogauchorecife</a></dd></div>
+<section class="sec sec--areia" id="onde">
+  <div class="cx">
+    <p class="rot up">Onde estamos</p>
+    <h2 class="up">Rua Frederico Cúrio, 106 — Afogados</h2>
+    <dl class="dados up">
+      <li><dt>Endereço</dt><dd>Rua Frederico Cúrio, 106 — Afogados, Recife, PE · CEP 50830-370
+        <small><a href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Frederico+C%C3%BArio%2C+106+-+Afogados%2C+Recife+-+PE%2C+50830-370" target="_blank" rel="noopener">Abrir no Google Maps</a></small></dd></li>
+      <li><dt>Horário</dt><dd>Todos os dias, das 11h às 23h</dd></li>
+      <li><dt>Pagamento</dt><dd>Débito, crédito e Pix</dd></li>
+      <li><dt>Retirada</dt><dd>Peça pelo WhatsApp e retire no local<small>Ainda não fazemos entrega em domicílio.</small></dd></li>
+      <li><dt>Telefone</dt><dd><a href="https://wa.me/5581984499419" target="_blank" rel="noopener">(81) 98449-9419</a></dd></li>
+      <li><dt>Instagram</dt><dd><a href="https://instagram.com/costelaogauchorecife" target="_blank" rel="noopener">@costelaogauchorecife</a></dd></li>
     </dl>
-  </section>
-
-  <!-- ============ FECHAMENTO ============ -->
-  <footer class="lp-fim">
-    <div class="lp-fim__brasa" aria-hidden="true"></div>
-    <h2 class="lp-entra">Chega cedo que a costela acaba</h2>
-    <div class="lp-btns lp-entra">
-      <a class="lp-btn lp-btn--zap" href="https://wa.me/5581984499419" target="_blank" rel="noopener">Chamar no WhatsApp</a>
-      <a class="lp-btn lp-btn--linha" href="cardapio/">Ver o cardápio</a>
+    <div class="bts up">
+      <a class="bt bt--zap" href="https://wa.me/5581984499419" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+      <a class="bt bt--linha" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Frederico+C%C3%BArio%2C+106+-+Afogados%2C+Recife+-+PE%2C+50830-370" target="_blank" rel="noopener">Ver no mapa</a>
     </div>
-    <p class="lp-tel lp-entra">(81) 98449-9419</p>
-    <p class="lp-mini">
+  </div>
+</section>
+
+<footer class="pe">
+  <div class="cx">
+    <div class="pe__grid">
+      <div>
+        <p class="pe__marca">Costelão Gaúcho</p>
+        <p>Churrascaria e boteco em Afogados, Recife.</p>
+      </div>
+      <div>
+        <h3>Contato</h3>
+        <p><a href="https://wa.me/5581984499419" target="_blank" rel="noopener">(81) 98449-9419</a></p>
+        <p><a href="https://instagram.com/costelaogauchorecife" target="_blank" rel="noopener">@costelaogauchorecife</a></p>
+      </div>
+      <div>
+        <h3>Endereço</h3>
+        <p>Rua Frederico Cúrio, 106<br>Afogados — Recife, PE<br>CEP 50830-370</p>
+        <p>Todo dia, 11h às 23h</p>
+      </div>
+    </div>
+    <p class="pe__fim">
       Preços sujeitos a alteração sem aviso prévio.<br>
       Venda de bebida alcoólica proibida para menores de 18 anos — Lei nº 13.106/2015.
     </p>
-  </footer>
-
-</div>
+  </div>
+</footer>
 
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"Restaurant",
-  "name":"Costelão Gaúcho",
-  "servesCuisine":["Churrasco","Brasileira","Boteco"],
-  "priceRange":"$$",
+  "@context":"https://schema.org","@type":"Restaurant","name":"Costelão Gaúcho",
+  "servesCuisine":["Churrasco","Brasileira","Boteco"],"priceRange":"$$",
   "telephone":"+55-81-98449-9419",
-  "address":{
-    "@type":"PostalAddress",
-    "streetAddress":"Rua Frederico Cúrio, 106",
-    "addressLocality":"Recife",
-    "addressRegion":"PE",
-    "postalCode":"50830-370",
-    "addressCountry":"BR"
-  },
-  "openingHoursSpecification":[{
-    "@type":"OpeningHoursSpecification",
-    "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-    "opens":"11:00","closes":"23:00"
-  }],
+  "address":{"@type":"PostalAddress","streetAddress":"Rua Frederico Cúrio, 106","addressLocality":"Recife","addressRegion":"PE","postalCode":"50830-370","addressCountry":"BR"},
+  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"11:00","closes":"23:00"}],
   "sameAs":["https://instagram.com/costelaogauchorecife"]
 }
 </script>
 
 <script>
 (function(){
-  var hora = new Date().getHours();
-  var aberto  = (hora >= 11 && hora < 23);
-  var noAlmoco = (hora >= 11 && hora < 16);
-  var naNoite  = (hora >= 16 && hora < 23);
+  var h=new Date().getHours(), el=document.getElementById('hora'), t=document.getElementById('hora-txt');
+  if(h>=11&&h<23){ el.classList.add('aberto'); t.textContent='Aberto agora \u00b7 fecha \u00e0s 23h'; }
+  else{ t.textContent='Fechado agora \u00b7 abre \u00e0s 11h'; }
 
-  // ---- tarja de horário ----
-  var status = document.getElementById('lp-status');
-  var stxt   = document.getElementById('lp-status-txt');
-  if(aberto){ status.classList.add('is-on'); stxt.textContent = 'Aberto agora \u00b7 fecha \u00e0s 23h'; }
-  else      { stxt.textContent = 'Fechado agora \u00b7 abre \u00e0s 11h'; }
-
-  // ---- a tese muda com a hora ----
-  var tese = document.getElementById('lp-tese');
-  var sub  = document.getElementById('lp-sub');
-  if(noAlmoco){
-    tese.innerHTML = 'Almo\u00e7o em Afogados,<br>de <b>19,99</b> a <b>25,99</b>.';
-    sub.textContent = 'Prato feito com arroz, feij\u00e3o, macarr\u00e3o, farofa, maionese e vinagrete. Sai r\u00e1pido, d\u00e1 tempo de voltar pro trabalho.';
-  }else if(naNoite){
-    tese.innerHTML = 'Espeto na brasa e<br>gelada at\u00e9 <b>as onze</b>.';
-    sub.textContent = 'Petisco pra dividir no meio da mesa, costela no bafo e chopp na caneca. Todo dia at\u00e9 as 23h.';
-  }
-
-  // ---- painel do turno vai pra frente ----
-  var selA = document.getElementById('lp-selo-almoco');
-  var selN = document.getElementById('lp-selo-noite');
-  var pA   = document.getElementById('lp-almoco');
-  var pN   = document.getElementById('lp-noite');
-
-  function frio(el){ el.classList.add('lp-selo--frio'); }
-  function quente(el){ el.classList.remove('lp-selo--frio'); }
-
-  if(naNoite){
-    document.getElementById('lp-turnos').insertBefore(pN, pA);
-    pN.classList.remove('lp-painel--quieto');
-    pA.classList.add('lp-painel--quieto');
-    quente(selN); selN.textContent = 'Agora';
-    frio(selA);   selA.textContent = 'Das 11h \u00e0s 16h';
-  }else if(!noAlmoco){
-    frio(selA); selA.textContent = 'Das 11h \u00e0s 16h';
-  }
-
-  // ---- revelar ao rolar ----
-  var alvos = document.querySelectorAll('.lp-entra');
-  if(!('IntersectionObserver' in window)){
-    alvos.forEach(function(el){ el.classList.add('lp-visivel'); });
-    return;
-  }
-  var obs = new IntersectionObserver(function(itens){
-    itens.forEach(function(it){
-      if(!it.isIntersecting) return;
-      var atraso = it.target.style.getPropertyValue('--atraso') || '0ms';
-      it.target.style.transitionDelay = atraso;
-      it.target.classList.add('lp-visivel');
-      obs.unobserve(it.target);
-    });
-  }, {rootMargin:'0px 0px -8% 0px', threshold:.08});
-
-  alvos.forEach(function(el, i){
-    if(!el.style.getPropertyValue('--atraso') && !el.closest('.lp-hero')){
-      el.style.setProperty('--atraso', ((i % 4) * 70) + 'ms');
-    }
-    obs.observe(el);
-  });
+  var alvos=document.querySelectorAll('.up');
+  if(!('IntersectionObserver' in window)){ alvos.forEach(function(e){e.classList.add('vis')}); return; }
+  var o=new IntersectionObserver(function(is){
+    is.forEach(function(i){ if(i.isIntersecting){ i.target.classList.add('vis'); o.unobserve(i.target); } });
+  },{rootMargin:'0px 0px -6% 0px',threshold:.06});
+  alvos.forEach(function(e,i){ e.style.transitionDelay=((i%3)*65)+'ms'; o.observe(e); });
 })();
 </script>
 </body>
